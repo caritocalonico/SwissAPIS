@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css" type="text/css">
+    <title>Perritos</title>
+</head>
+<body>
+
+    <ul id="razas"></ul>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <script>
+
+$.ajax ({
+    url: 'https://dog.ceo/api/breeds/list',
+    method: 'GET',
+    success: function (data) {
+        data.message.forEach(function (raza) {
+
+            $.ajax ({
+                url: `https://dog.ceo/api/breed/${raza}/images/random`,
+                method: 'GET',
+                success: function (data) {
+                    $('#razas').append( ` <li> <a href= "${data.message}"> ${raza} </a> </li> ` );
+                }
+            })
+        })
+    }
+})
+
+    </script>
+
+</body>
+</html>
